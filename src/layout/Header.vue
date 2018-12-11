@@ -1,5 +1,5 @@
 <template>
-    <el-menu :default-active="1" mode="horizontal" router="true">
+    <el-menu :default-active="activeIndex" mode="horizontal" :router="isRouter">
         <el-menu-item index="/">Home</el-menu-item>
         <el-menu-item index="/all">All</el-menu-item>
         <el-menu-item index="/todo">Todo</el-menu-item>
@@ -9,7 +9,13 @@
 
 <script>
     export default {
-        name: "Header"
+        name: "Header",
+        data() {
+            return {
+                activeIndex : 1,
+                isRouter: true
+            }
+        }
     }
 </script>
 
