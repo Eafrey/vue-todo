@@ -8,12 +8,16 @@ export default new Vuex.Store({
         todos: [
             {
                 id: "1",
-                content: 'todo1',
-                complete: "false",
+                text: 'todo1',
+                done: false,
                 readOnly: "true",
-                date: "11111",
+                createDate: "11111",
             }
         ],
+    },
+    getters: {
+        doneTodos: state => state.todos.filter(todo => todo.done),
+        undoneTodos: state => state.todos.filter(todo => todo.done)
     },
     mutations: {},
     actions: {},

@@ -3,7 +3,7 @@ import Router from 'vue-router';
 import Home from '@/views/Home'
 import Todo from '@/views/Todo'
 import Done from "@/views/Done";
-import All from "@/views/All";
+import AddTodo from "@/views/AddTodo";
 
 Vue.use(Router);
 
@@ -26,9 +26,9 @@ export default new Router({
       component: Done,
     },
     {
-      path: '/all',
-      name: 'all',
-      component: All,
+      path: '/add',
+      name: 'add',
+      component: AddTodo,
     },
   ],
 });
