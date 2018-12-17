@@ -26,6 +26,9 @@
             <el-table-column
                     prop="adaptable"
                     label="Adaptable">
+                <template slot-scope="scope">
+                    <el-checkbox v-model="scope.row.adaptable">Adaptable</el-checkbox>
+                </template>
             </el-table-column>
             <el-table-column
                     prop="content"
@@ -34,6 +37,9 @@
             <el-table-column
                     prop="done"
                     label="Done status">
+                <template slot-scope="scope">
+                    <el-checkbox v-model="scope.row.done">Done</el-checkbox>
+                </template>
             </el-table-column>
             <el-table-column
                     prop="createDate"

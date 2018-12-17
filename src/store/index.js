@@ -6,7 +6,18 @@ Vue.use(Vuex);
 export default new Vuex.Store({
     state: {
         id: 0,
-        todos: [],
+        todos: [
+            {
+                id: 1,
+                title: 'title',
+                content: 'content',
+                type: 'none',
+                createDate: 1,
+                endDate: 1,
+                adaptable: false,
+                done: true
+            }
+        ],
     },
     getters: {
         doneTodos: state => state.todos.filter(todo => todo.done),
