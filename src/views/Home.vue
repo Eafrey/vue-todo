@@ -13,6 +13,9 @@
                     prop="title"
                     label="Title"
                     width="180">
+                <template slot-scope="scope">
+                    <el-input v-model="scope.row.title"></el-input>
+                </template>
             </el-table-column>
             <el-table-column
                     prop="type"
@@ -48,8 +51,8 @@
             <el-table-column
                 label="Operation">
                 <template slot-scope="scope">
-                    <el-button @click="handleClick(scope.row)" type="text" size="small">Open</el-button>
-                    <el-button type="text" size="small">Modify</el-button>
+                    <el-button @click="openTodo(scope.row)" type="text" size="small">Open</el-button>
+                    <el-button @click="modifyTodo(scope.row)" type="text" size="small">Modify</el-button>
                     <el-button @click="deleteTodo(scope.row)" type="text" size="small">Delete</el-button>
                 </template>
             </el-table-column>
@@ -72,8 +75,11 @@
             addTodo() {
                 this.$router.push('/add')
             },
-            handleClick(row) {
-                 console.log(row);
+            openTodo(row) {
+                     this.$router.push(`/todo/${row.id}`)
+            },
+            modifyTodo(row) {
+                this.$router.push('/todo/:id')
             },
             deleteTodo(row) {
                 this.$store.commit("deleteTodo", row.id)

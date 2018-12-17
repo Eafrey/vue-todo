@@ -8,7 +8,7 @@ export default new Vuex.Store({
         id: 0,
         todos: [
             {
-                id: 1,
+                id: 0,
                 title: 'title',
                 content: 'content',
                 type: 'none',
@@ -22,6 +22,9 @@ export default new Vuex.Store({
     getters: {
         doneTodos: state => state.todos.filter(todo => todo.done),
         undoneTodos: state => state.todos.filter(todo => todo.done),
+        getTodoById: (state) => (id) => {
+            return state.todos.find(todo => todo.id === id)
+        }
     },
     mutations: {
         addTodo(state, todo) {
