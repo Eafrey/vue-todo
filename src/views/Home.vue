@@ -10,21 +10,34 @@
                     width="180">
             </el-table-column>
             <el-table-column
-                    prop="content"
-                    label="Content"
+                    prop="title"
+                    label="Title"
                     width="180">
             </el-table-column>
             <el-table-column
-                    prop="complete"
-                    label="Compelete">
+                    prop="type"
+                    label="Type"
+                    width="180">
             </el-table-column>
             <el-table-column
-                    prop="readOnly"
-                    label="ReadOnly">
+                    prop="endDate"
+                    label="End date">
             </el-table-column>
             <el-table-column
-                    prop="date"
-                    label="Date">
+                    prop="adaptable"
+                    label="Adaptable">
+            </el-table-column>
+            <el-table-column
+                    prop="content"
+                    label="Content">
+            </el-table-column>
+            <el-table-column
+                    prop="done"
+                    label="Done status">
+            </el-table-column>
+            <el-table-column
+                    prop="createDate"
+                    label="Create date">
             </el-table-column>
         </el-table>
     </div>
@@ -37,6 +50,9 @@
             return {
                 tableData: this.$store.state.todos
             };
+        },
+        mounted() {
+          console.log('todos home', this.$store.state.todos)
         },
         methods: {
             addTodo() {

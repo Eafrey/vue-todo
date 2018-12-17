@@ -5,20 +5,17 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
     state: {
-        todos: [
-            {
-                id: "1",
-                text: 'todo1',
-                done: false,
-                readOnly: "true",
-                createDate: "11111",
-            }
-        ],
+        todos: [],
     },
     getters: {
         doneTodos: state => state.todos.filter(todo => todo.done),
         undoneTodos: state => state.todos.filter(todo => todo.done)
     },
-    mutations: {},
+    mutations: {
+        addTodo(state, todo) {
+            state.todos.push(todo)
+            console.log('todos store', state.todos)
+        }
+    },
     actions: {},
 });

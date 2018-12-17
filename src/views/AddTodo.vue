@@ -1,49 +1,51 @@
 <template>
     <div>
         <h3 class="form-title">Creat an new todo</h3>
-        <el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-width="100px" class="demo-ruleForm">
+        <el-form :model="todo" :rules="rules" ref="todo" label-width="100px" class="demo-todo">
             <el-form-item label="Title" prop="title">
-                <el-input v-model="ruleForm.title"></el-input>
+                <el-input v-model="todo.title"></el-input>
             </el-form-item>
             <el-form-item label="Type" prop="type">
-                <el-select v-model="ruleForm.type" placeholder="Select todo type">
+                <el-select v-model="todo.type" placeholder="Select todo type">
                     <el-option label="type1" value="type1"></el-option>
                     <el-option label="type2" value="type2"></el-option>
                 </el-select>
             </el-form-item>
             <el-form-item label="End date" required>
                 <el-col :span="11">
-                    <el-form-item prop="date">
-                        <el-date-picker type="date" placeholder="Select date" v-model="ruleForm.date"
+                    <el-form-item prop="endDate">
+                        <el-date-picker type="date" placeholder="Select date" v-model="todo.endDate"
                                         style="width: 100%;"></el-date-picker>
                     </el-form-item>
                 </el-col>
             </el-form-item>
             <el-form-item label="Adaptable" prop="adaptable">
-                <el-switch v-model="ruleForm.adaptable"></el-switch>
+                <el-switch v-model="todo.adaptable"></el-switch>
             </el-form-item>
             <el-form-item label="Content" prop="content">
-                <el-input type="textarea" v-model="ruleForm.content"></el-input>
+                <el-input type="textarea" v-model="todo.content"></el-input>
             </el-form-item>
             <el-form-item>
-                <el-button type="primary" @click="submitForm('ruleForm')">立即创建</el-button>
-                <el-button @click="resetForm('ruleForm')">重置</el-button>
+                <el-button type="primary" @click="submitForm('todo')">立即创建</el-button>
+                <el-button @click="resetForm('todo')">重置</el-button>
             </el-form-item>
         </el-form>
     </div>
 </template>
 
 <script>
+    import  {getDateString, getDateStringWithoutHour} from "../utils/date";
+
     export default {
         name: "All",
         mounted() {
         },
         data() {
             return {
-                ruleForm: {
+                todo: {
                     title: '',
                     type: '',
-                    date: '',
+                    endDate: '',
                     adaptable: false,
                     content: '',
                 },
@@ -54,7 +56,7 @@
                     type: [
                         {required: true, message: 'Please select type', trigger: 'change'}
                     ],
-                    date: [
+                    endDate: [
                         {type: 'date', required: true, message: 'Please Select date', trigger: 'change'}
                     ],
                     adaptable: [],
@@ -72,7 +74,10 @@
                             message: 'The todo was successfully created.',
                             type: 'success'
                         });
-                        this.$router.push('/')
+                        console.log('todo', this.todo)
+                        this.todo = {...this.todo, createDate: getDateString(new Date(Date.now())),endDate: getDateStringWithoutHour(this.todo.endDate)}
+                        this.$store.commit("addTodo", this.todo);
+                        this.$router.push('/');
                     } else {
                         this.$message({
                             message: 'Error.',
