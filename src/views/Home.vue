@@ -39,6 +39,14 @@
                     prop="createDate"
                     label="Create date">
             </el-table-column>
+            <el-table-column
+                label="Operation">
+                <template slot-scope="scope">
+                    <el-button @click="handleClick(scope.row)" type="text" size="small">Open</el-button>
+                    <el-button type="text" size="small">Modify</el-button>
+                    <el-button @click="deleteTodo(scope.row)" type="text" size="small">Delete</el-button>
+                </template>
+            </el-table-column>
         </el-table>
     </div>
 </template>
@@ -48,7 +56,7 @@
         name: "Home",
         data() {
             return {
-                tableData: this.$store.state.todos
+                tableData: this.$store.state.todos,
             };
         },
         mounted() {
@@ -57,7 +65,13 @@
         methods: {
             addTodo() {
                 this.$router.push('/add')
-            }
+            },
+            handleClick(row) {
+                 console.log(row);
+            },
+            deleteTodo(row) {
+                this.$store.commit("deleteTodo", row.id)
+            },
         }
     }
 </script>

@@ -75,7 +75,14 @@
                             type: 'success'
                         });
                         console.log('todo', this.todo)
-                        this.todo = {...this.todo, createDate: getDateString(new Date(Date.now())),endDate: getDateStringWithoutHour(this.todo.endDate)}
+                        this.$store.commit('increaseId')
+                        this.todo = {
+                            ...this.todo,
+                            id: this.$store.state.id,
+                            createDate: getDateString(new Date(Date.now())),
+                            endDate: getDateStringWithoutHour(this.todo.endDate),
+                            done:false,
+                        }
                         this.$store.commit("addTodo", this.todo);
                         this.$router.push('/');
                     } else {
