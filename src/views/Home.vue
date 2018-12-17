@@ -13,9 +13,6 @@
                     prop="title"
                     label="Title"
                     width="180">
-                <template slot-scope="scope">
-                    <el-input v-model="scope.row.title"></el-input>
-                </template>
             </el-table-column>
             <el-table-column
                     prop="type"
@@ -76,10 +73,10 @@
                 this.$router.push('/add')
             },
             openTodo(row) {
-                     this.$router.push(`/todo/${row.id}`)
+                 this.$router.push(`/todo/${row.id}`)
             },
             modifyTodo(row) {
-                this.$router.push('/todo/:id')
+                this.$router.push(`/modify/${row.id}`)
             },
             deleteTodo(row) {
                 this.$store.commit("deleteTodo", row.id)

@@ -1,6 +1,6 @@
 <template>
     <div>
-        <h3 class="form-title">Creat an new todo</h3>
+        <h3 class="form-title">Modify todo</h3>
         <el-form :model="todo" :rules="rules" ref="todo" label-width="100px" class="demo-todo">
             <el-form-item label="Title" prop="title">
                 <el-input v-model="todo.title"></el-input>
@@ -19,14 +19,11 @@
                     </el-form-item>
                 </el-col>
             </el-form-item>
-            <el-form-item label="Adaptable" prop="adaptable">
-                <el-switch v-model="todo.adaptable"></el-switch>
-            </el-form-item>
             <el-form-item label="Content" prop="content">
                 <el-input type="textarea" v-model="todo.content"></el-input>
             </el-form-item>
             <el-form-item>
-                <el-button type="primary" @click="submitForm('todo')">Create</el-button>
+                <el-button type="primary" @click="submitForm('todo')">Modify</el-button>
                 <el-button @click="resetForm('todo')">Reset</el-button>
             </el-form-item>
         </el-form>
@@ -37,18 +34,15 @@
     import  {getDateString, getDateStringWithoutHour} from "../utils/date";
 
     export default {
-        name: "All",
-        mounted() {
+        name: "Done",
+        computed: {
+            todo() {
+                let id = this.$route.params.id;
+                return this.$store.getters.getTodoById(parseInt(id))
+            }
         },
         data() {
             return {
-                todo: {
-                    title: '',
-                    type: '',
-                    endDate: '',
-                    adaptable: false,
-                    content: '',
-                },
                 rules: {
                     title: [
                         {required: true, message: 'Please input the title', trigger: 'blur'},
@@ -71,19 +65,14 @@
                 this.$refs[formName].validate((valid) => {
                     if (valid) {
                         this.$message({
-                            message: 'The todo was successfully created.',
+                            message: 'The todo was successfully modified.',
                             type: 'success'
                         });
-                        console.log('todo', this.todo)
-                        this.$store.commit('increaseId')
-                        this.todo = {
+                        let newTodo = {
                             ...this.todo,
-                            id: this.$store.state.id,
-                            createDate: getDateString(new Date(Date.now())),
-                            endDate: getDateStringWithoutHour(this.todo.endDate),
-                            done:false,
+                            // endDate: getDateStringWithoutHour(this.todo.endDate),
                         }
-                        this.$store.commit("addTodo", this.todo);
+                        this.$store.commit("modifyTodo", newTodo);
                         this.$router.push('/');
                     } else {
                         this.$message({

@@ -27,6 +27,9 @@ export default new Vuex.Store({
         }
     },
     mutations: {
+        modifyTodo(state, todo) {
+          state.todos = {...state.todos, todo}
+        },
         addTodo(state, todo) {
             state.todos.push(todo)
         },
