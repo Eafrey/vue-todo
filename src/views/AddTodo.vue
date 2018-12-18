@@ -82,6 +82,7 @@
                             createDate: getDateString(new Date(Date.now())),
                             endDate: getDateStringWithoutHour(this.todo.endDate),
                             done:false,
+                            visible: true,
                         }
                         this.$store.commit("addTodo", this.todo);
                         this.$router.push('/');

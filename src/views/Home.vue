@@ -1,8 +1,21 @@
 <template>
-    <div>
+    <div class="container">
         <el-button class="add-button" @click="addTodo">Add todo</el-button>
+        <div>
+            <span>Filter type:</span>
+            <el-select v-model="type" placeholder="Select todo type" @change="filterType">
+                <el-option label="type1" value="type1"></el-option>
+                <el-option label="type2" value="type2"></el-option>
+            </el-select>
+            <span>Filter done status:</span>
+            <el-checkbox @change="filterDoneStatus">
+                Done
+            </el-checkbox>
+            <span>Filter title&content</span>
+            <el-input v-model="fileteredText" :change="filterText" clearable/>
+        </div>
         <el-table
-                :data="tableData" class="table">
+                :data="tableData" >
             <el-table-column
                     prop="id"
                     label="ID"
@@ -48,7 +61,7 @@
                     label="Adaptable"
                     width="100">
                 <template slot-scope="scope">
-                    <el-checkbox v-model="scope.row.adaptable" disabled="true">
+                    <el-checkbox v-model="scope.row.adaptable" disabled>
                         Adaptable
                     </el-checkbox>
                 </template>
@@ -70,13 +83,29 @@
         name: "Home",
         data() {
             return {
-                tableData: this.$store.state.todos,
+                type: '',
+                fileteredText: '',
             };
+        },
+        computed: {
+            tableData() {
+                return this.$store.getters.visibleTodos;
+            }
         },
         mounted() {
           console.log('todos in home', this.$store.state.todos)
         },
         methods: {
+            filterType(type) {
+                this.$store.commit("filterType", type)
+            },
+            filterDoneStatus(done) {
+                this.$store.commit("filterDoneStatus", done)
+            },
+            filterText(text) {
+                console.log('11', text)
+                this.$store.commit("filterText", text)
+            },
             onChange(row) {
                 console.log('on change', row)
                 this.$store.commit("modifyTodo", row);
@@ -105,7 +134,7 @@
 </script>
 
 <style scoped>
-    .table {
+    .container {
         margin:0 auto;
         width: 80%;
     }
