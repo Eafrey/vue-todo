@@ -42,7 +42,7 @@
                     label="Done status"
                     width="100">
                 <template slot-scope="scope">
-                    <el-checkbox v-model="scope.row.done" @change="onChange(scope.row)">
+                    <el-checkbox v-model="scope.row.done" @change="onChangeRow(scope.row)">
                         Done
                     </el-checkbox>
                 </template>
@@ -94,7 +94,6 @@
             }
         },
         mounted() {
-            console.log('todos in home', this.$store.state.todos)
         },
         methods: {
             filterType(type) {
@@ -106,8 +105,7 @@
             filterText(text) {
                 this.$store.commit("filterText", text)
             },
-            onChange(row) {
-                console.log('on change', row)
+            onChangeRow(row) {
                 this.$store.commit("modifyTodo", row);
             },
             addTodo() {

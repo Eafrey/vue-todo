@@ -74,7 +74,6 @@
                             message: 'The todo was successfully created.',
                             type: 'success'
                         });
-                        console.log('todo', this.todo)
                         this.$store.commit('increaseId')
                         this.todo = {
                             ...this.todo,
