@@ -1,5 +1,6 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
+import {getDateString} from "../utils/date";
 
 Vue.use(Vuex);
 
@@ -10,9 +11,9 @@ export default new Vuex.Store({
             {
                 id: 0,
                 title: 'title',
-                content: 'content',
-                type: 'none',
-                createDate: 1,
+                content: 'This is an example.',
+                type: 'type1',
+                createDate: getDateString(new Date(Date.now())),
                 endDate: '2018-12-31',
                 adaptable: true,
                 done: false

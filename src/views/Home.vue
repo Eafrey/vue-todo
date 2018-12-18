@@ -2,43 +2,31 @@
     <div>
         <el-button class="add-button" @click="addTodo">Add todo</el-button>
         <el-table
-                :data="tableData"
-                style="width: 100%">
+                :data="tableData" class="table">
             <el-table-column
                     prop="id"
                     label="ID"
-                    width="180">
+                    width="100">
             </el-table-column>
             <el-table-column
                     prop="title"
                     label="Title"
-                    width="180">
+                    width="100">
             </el-table-column>
             <el-table-column
                     prop="type"
                     label="Type"
-                    width="180">
-            </el-table-column>
-            <el-table-column
-                    prop="endDate"
-                    label="End date">
-            </el-table-column>
-            <el-table-column
-                    prop="adaptable"
-                    label="Adaptable">
-                <template slot-scope="scope">
-                    <el-checkbox v-model="scope.row.adaptable" disabled="true">
-                        Adaptable
-                    </el-checkbox>
-                </template>
+                    width="100">
             </el-table-column>
             <el-table-column
                     prop="content"
-                    label="Content">
+                    label="Content"
+                    width="200">
             </el-table-column>
             <el-table-column
                     prop="done"
-                    label="Done status">
+                    label="Done status"
+                    width="100">
                 <template slot-scope="scope">
                     <el-checkbox v-model="scope.row.done" @change="onChange(scope.row)">
                         Done
@@ -47,7 +35,23 @@
             </el-table-column>
             <el-table-column
                     prop="createDate"
-                    label="Create date">
+                    label="Create date"
+                    width="150">
+            </el-table-column>
+            <el-table-column
+                    prop="endDate"
+                    label="End date"
+                    width="100">
+            </el-table-column>
+            <el-table-column
+                    prop="adaptable"
+                    label="Adaptable"
+                    width="100">
+                <template slot-scope="scope">
+                    <el-checkbox v-model="scope.row.adaptable" disabled="true">
+                        Adaptable
+                    </el-checkbox>
+                </template>
             </el-table-column>
             <el-table-column
                 label="Operation">
@@ -101,6 +105,10 @@
 </script>
 
 <style scoped>
+    .table {
+        margin:0 auto;
+        width: 80%;
+    }
     .add-button {
         display: block;
         margin: 0 auto;
