@@ -13,9 +13,9 @@ export default new Vuex.Store({
                 content: 'content',
                 type: 'none',
                 createDate: 1,
-                endDate: 1,
-                adaptable: false,
-                done: true
+                endDate: '2018-12-31',
+                adaptable: true,
+                done: false
             }
         ],
     },
@@ -27,10 +27,10 @@ export default new Vuex.Store({
         }
     },
     mutations: {
-        modifyTodo(state, todo) {
-          state.todos = {...state.todos, todo}
+        modifyTodo(state, newTodo) {
+            state.todos.filter(todo => todo.id === newTodo.id).map(() => newTodo);
         },
-        addTodo(state, todo) {
+        addTodo(state, todo){
             state.todos.push(todo)
         },
         deleteTodo(state, deleteId) {

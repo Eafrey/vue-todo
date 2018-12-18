@@ -31,7 +31,7 @@
 </template>
 
 <script>
-    import  {getDateString, getDateStringWithoutHour} from "../utils/date";
+    import {getDateString, getDateStringWithoutHour} from "../utils/date";
 
     export default {
         name: "Done",
@@ -51,9 +51,8 @@
                         {required: true, message: 'Please select type', trigger: 'change'}
                     ],
                     endDate: [
-                        {type: 'date', required: true, message: 'Please Select date', trigger: 'change'}
+                        {type: 'date', required: true, message: 'Please Select date', trigger: 'blur'}
                     ],
-                    adaptable: [],
                     content: [
                         {required: true, message: 'Please input the todo content', trigger: 'blur'}
                     ]
@@ -68,11 +67,8 @@
                             message: 'The todo was successfully modified.',
                             type: 'success'
                         });
-                        let newTodo = {
-                            ...this.todo,
-                            // endDate: getDateStringWithoutHour(this.todo.endDate),
-                        }
-                        this.$store.commit("modifyTodo", newTodo);
+                        this.todo.endDate = getDateStringWithoutHour(this.todo.endDate)
+                        this.$store.commit("modifyTodo", this.todo);
                         this.$router.push('/');
                     } else {
                         this.$message({

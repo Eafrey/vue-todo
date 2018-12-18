@@ -27,7 +27,9 @@
                     prop="adaptable"
                     label="Adaptable">
                 <template slot-scope="scope">
-                    <el-checkbox v-model="scope.row.adaptable">Adaptable</el-checkbox>
+                    <el-checkbox v-model="scope.row.adaptable" disabled="true">
+                        Adaptable
+                    </el-checkbox>
                 </template>
             </el-table-column>
             <el-table-column
@@ -38,7 +40,9 @@
                     prop="done"
                     label="Done status">
                 <template slot-scope="scope">
-                    <el-checkbox v-model="scope.row.done">Done</el-checkbox>
+                    <el-checkbox v-model="scope.row.done" @change="onChange(scope.row)">
+                        Done
+                    </el-checkbox>
                 </template>
             </el-table-column>
             <el-table-column
@@ -66,9 +70,13 @@
             };
         },
         mounted() {
-          console.log('todos home', this.$store.state.todos)
+          console.log('todos in home', this.$store.state.todos)
         },
         methods: {
+            onChange(row) {
+                console.log('on change', row)
+                this.$store.commit("modifyTodo", row);
+            },
             addTodo() {
                 this.$router.push('/add')
             },
@@ -76,6 +84,13 @@
                  this.$router.push(`/todo/${row.id}`)
             },
             modifyTodo(row) {
+                if(!row.adaptable) {
+                    this.$message({
+                        message: "This todo cannot be modified!",
+                        type: "error"
+                    })
+                    return;
+                }
                 this.$router.push(`/modify/${row.id}`)
             },
             deleteTodo(row) {
