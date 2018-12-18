@@ -45,8 +45,6 @@ export default new Vuex.Store({
     },
     getters: {
         visibleTodos: state => state.todos.filter(todo => todo.visible),
-        doneTodos: state => state.todos.filter(todo => todo.done),
-        undoneTodos: state => state.todos.filter(todo => todo.done),
         getTodoById: (state) => (id) => {
             return state.todos.find(todo => todo.id === id)
         }
@@ -81,8 +79,13 @@ export default new Vuex.Store({
             state.todos.map(todo => {
                 todo.visible = true;
             })
-            state.todos.filter(todo => todo.title.find(text) === -1 && todo.content.find(text) === -1).map(todo => {
+            state.todos.filter(todo => todo.title.indexOf(text) === -1 && todo.content.indexOf(text) === -1).map(todo => {
                 todo.visible = false;
+            })
+        },
+        clearFilter(state) {
+            state.todos.map(todo => {
+                todo.visible = true;
             })
         },
         increaseId(state) {
