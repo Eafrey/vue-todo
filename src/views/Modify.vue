@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="todo-form">
         <h3 class="form-title">Modify todo</h3>
         <el-form :model="todo" :rules="rules" ref="todo" label-width="100px" class="demo-todo">
             <el-form-item label="Title" prop="title">
@@ -87,6 +87,10 @@
 </script>
 
 <style scoped>
+    .todo-form {
+        width: 50%;
+        margin: 0 auto;
+    }
     .form-title {
         margin-left: 100px;
     }
